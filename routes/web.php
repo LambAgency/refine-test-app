@@ -33,3 +33,12 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/reports/create', function () {
+    return Inertia::render('Reports');
+})->name('reports.create');
+
+Route::post('/reports', function (\Illuminate\Http\Request $request) {
+    dd($request->all());
+})->name('reports.store');
