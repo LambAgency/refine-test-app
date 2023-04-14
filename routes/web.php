@@ -1,5 +1,6 @@
 <?php
 
+use App\Filters\Filter;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,9 +37,8 @@ Route::middleware([
 
 
 Route::get('/reports/create', function () {
-    return Inertia::render('Reports');
+    return Inertia::render('Reports', [
+        'filter' => (new \App\Filters\UserFilter())->toArray()
+    ]);
 })->name('reports.create');
 
-Route::post('/reports', function (\Illuminate\Http\Request $request) {
-    dd($request->all());
-})->name('reports.store');

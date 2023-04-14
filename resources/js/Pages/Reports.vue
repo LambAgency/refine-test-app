@@ -1,22 +1,34 @@
 <template>
     <div>
-        <QueryBuilder :errors="errors" :blueprint="form.form" :flavor="tailwindFlavor"  conditions=""/>
+        <QueryBuilder
+            v-model:blueprint="form.blueprint"
+            :errors="errors"
+            :flavor="tailwind"
+            :conditions="filter.conditions" />
     </div>
 </template>
 
-<script setup>
-import QueryBuilder from '@hammerstone/refine-vue3/src/components/base/query-builder/query-builder.vue';
+<script setup lang="ts">
+import { QueryBuilder } from "@hammerstone/refine-vue3"
 import tailwindFlavor from '@hammerstone/refine-vue3/src/flavors/tailwind.js';
 import {useForm} from "@inertiajs/vue3";
+import {ref} from "vue";
 
-let errors = ref(null);
+let errors = ref({});
+
+let tailwind = ref(tailwindFlavor);
+
+const props = defineProps<{
+    filter: {
+        blueprint: any[]
+        conditions: any[]
+        errors: any[]
+    } | null
+}>();
 
 let form = useForm({
-    blueprint: null
-});
-
-form.post(route('reports.store'));
-
+    blueprint: props.filter?.blueprint || [],
+})
 
 </script>
 

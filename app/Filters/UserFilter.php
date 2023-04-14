@@ -2,10 +2,10 @@
 
 namespace App\Filters;
 
+use App\Conditions\UserOptionCondition;
 use App\Models\User;
 use Hammerstone\Refine\Conditions\OptionCondition;
 use Hammerstone\Refine\Conditions\TextCondition;
-use Hammerstone\Refine\Filter;
 
 class UserFilter extends Filter
 {
@@ -19,9 +19,7 @@ class UserFilter extends Filter
         return [
             TextCondition::make('name'),
             TextCondition::make('email'),
+            UserOptionCondition::make(),
         ];
     }
-}
-{
-
 }
